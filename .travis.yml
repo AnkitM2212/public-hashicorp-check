@@ -1,22 +1,15 @@
 os: linux
 dist: focal
 language: python
-jobs.include:
-  - vault:
-      api_url: $VAULT_ADDR
-      token:
-        secure: $VAULT_TOKEN
-      secrets:
-        - kv_api_ver: kv2
-        - namespace:
-          - vault status
-          - name: ns1
+vault:
+  api_url: https://vault-cluster-public-vault-836becf3.582f5867.z1.hashicorp.cloud:8200
+  token:
+    secure: "B1+iuOX9GRtfYyI/kflwsfBcg1+gjgJnaoqo9j3S9Aqi6uj5JX8EvBLw60R5XgZG434XX1oXtcmIils12nWGWWEHbTe7J3dUYhz/uTvwhzElCd1budYkSAB3W5YwMPVWLsezvvAhuIljlL6rjJoQYq/3mYK/ACLXgwVfUDJtrS7gjdMnkqJ/otBn7LH/1IpKkENH5Z+rMslCjdu96WPULdlLZBH38kM+r2dQ6cXmqtWiNrB2PSP3J3Kuf7xUk/AaL+ERnRHEMc92p0aV/mNYnp8k4QDTrCInZlHqavb/kB6H+4cXzLV461G35iiw9fwF8NZ+UeD+jg9yJFCcmpg364VTDF2HtY3/PM0WJ4x3srAZVRC9RoR94uC/f46N/l0MGQtHvKQDr6Ac7kmpMO5m/y8O40ARbFfYNnnrg1wSvB2JXjwNr6BFeuR+3/Cf2Lf1pbI8esJsBX9EYVkests8HdGh65ufon+afoh0lFiM3tKyRQE7/CCRtPmvH6U5d2ZdVYfU87ixExo8nuiKTKxyIvMDN2nQW82ZGs/IozB/pZ0WViIhWNNbGc7hBcdl2KximDQnjsQ06UWscMnBguJH2Khv6l0tf4o1TERaWPtvxbJcuuZIAkSvg6ZPeWeNfs2UVtr2fp47tYnSmDtilFasNPAZeF3GsDL8T3KbwN9ASSo="
+  secrets:
+    - kv_api_ver: kv2
+    - namespace:
+      - name: ns1
+      - new_kv/cred
 script:
-  - python hello_world.py
-#   - vault status
-#       script:
-#   #       - python hello_world.py
-#         - vault status
-  #       - vault kv put -mount=secret creds passcode="Ankit@1234_HashiCheck"
-  #       - vault kv get -mount=secret creds
-      
+    - $TOKEN1 --version
+    - python hello_world.py
